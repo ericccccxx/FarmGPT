@@ -57,7 +57,7 @@
 
       header {
         position: relative;
-        padding: 38px clamp(18px, 5vw, 64px) 92px;
+        padding: 38px clamp(18px, 5vw, 64px) 102px;
         color: white;
         background:
           linear-gradient(115deg, rgba(18, 63, 49, 0.96), rgba(35, 106, 75, 0.78) 50%, rgba(200, 111, 76, 0.55)),
@@ -78,7 +78,15 @@
       .header-inner {
         position: relative;
         z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+        gap: 34px;
+        align-items: center;
         max-width: 1180px;
+      }
+
+      .hero-copy {
+        min-width: 0;
       }
 
       h1 {
@@ -119,6 +127,74 @@
         border-radius: 999px;
         background: #9be3a7;
         box-shadow: 0 0 0 4px rgba(155, 227, 167, 0.17);
+      }
+
+      .hero-board {
+        display: grid;
+        grid-template-columns: 1fr 0.82fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .hero-pin {
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 8px;
+        padding: 14px;
+        color: #173f32;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 250, 241, 0.84)),
+          #ffffff;
+        box-shadow: 0 22px 42px rgba(11, 31, 24, 0.18);
+      }
+
+      .hero-pin:nth-child(2) {
+        margin-top: 28px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(223, 238, 227, 0.92)),
+          var(--mint);
+      }
+
+      .hero-pin:nth-child(3) {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: -2px 28px 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(216, 232, 238, 0.86)),
+          var(--blue);
+      }
+
+      .hero-pin span {
+        display: block;
+        color: rgba(23, 63, 50, 0.66);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .hero-pin strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .hero-pin small {
+        display: block;
+        margin-top: 8px;
+        color: rgba(23, 63, 50, 0.66);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .hero-swatch {
+        height: 72px;
+        border-radius: 7px;
+        background:
+          linear-gradient(135deg, rgba(35, 106, 75, 0.88), rgba(215, 166, 72, 0.72)),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='120' viewBox='0 0 220 120'%3E%3Cpath d='M0 80 C40 54 66 95 104 68 C145 39 178 76 220 47 L220 120 L0 120 Z' fill='%23fffaf1' fill-opacity='.45'/%3E%3Cpath d='M20 0 L20 120 M60 0 L60 120 M100 0 L100 120 M140 0 L140 120 M180 0 L180 120' stroke='%23fff' stroke-opacity='.22' stroke-width='7'/%3E%3C/svg%3E");
+        background-size: cover;
       }
 
       main {
@@ -1062,6 +1138,25 @@
       }
 
       @media (max-width: 940px) {
+        .header-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-board {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .hero-pin,
+        .hero-pin:nth-child(2),
+        .hero-pin:nth-child(3) {
+          grid-column: auto;
+          margin: 0;
+        }
+
+        .hero-pin:nth-child(3) {
+          grid-template-columns: 1fr;
+        }
+
         .panel {
           position: static;
           max-height: none;
@@ -1086,7 +1181,23 @@
 
       @media (max-width: 620px) {
         header {
-          padding-bottom: 78px;
+          padding-bottom: 70px;
+        }
+
+        .hero-board {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-pin {
+          padding: 12px;
+        }
+
+        .hero-pin:nth-child(3) {
+          display: none;
+        }
+
+        .hero-pin strong {
+          font-size: 20px;
         }
 
         main {
@@ -1175,9 +1286,31 @@
   <body>
     <header>
       <div class="header-inner">
-        <div class="eyebrow">V1.0-ready local browser demo</div>
-        <h1>AI Farm Copilot</h1>
-        <p class="tagline">Turn field photos, local evidence signals, CSV/JSON readings, satellite NDVI trends, map locations, area sketches, and fusion scoring into pilot-ready scouting reports. The demo runs entirely in your browser.</p>
+        <div class="hero-copy">
+          <div class="eyebrow">V1.0-ready local browser demo</div>
+          <h1>AI Farm Copilot</h1>
+          <p class="tagline">Turn field photos, local evidence signals, CSV/JSON readings, satellite NDVI trends, map locations, area sketches, and fusion scoring into pilot-ready scouting reports. The demo runs entirely in your browser.</p>
+        </div>
+        <div class="hero-board" aria-hidden="true">
+          <div class="hero-pin">
+            <span>Risk focus</span>
+            <strong>Medium</strong>
+            <small>Leaf stress, dry week, recheck in 48-72 hours.</small>
+          </div>
+          <div class="hero-pin">
+            <span>NDVI</span>
+            <strong>0.55</strong>
+            <small>Stable local demo trend.</small>
+          </div>
+          <div class="hero-pin">
+            <div>
+              <span>Area map</span>
+              <strong>4 zones</strong>
+              <small>Boundaries and saved pins.</small>
+            </div>
+            <div class="hero-swatch"></div>
+          </div>
+        </div>
       </div>
     </header>
 
